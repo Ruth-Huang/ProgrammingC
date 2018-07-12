@@ -1,3 +1,8 @@
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
@@ -5,10 +10,6 @@
 #include <time.h> 
 #include "server_api.h"
 #include "gpio.h"
-
-
-
-
 
 int main(int argc, char *argv[])
 {
