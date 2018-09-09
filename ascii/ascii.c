@@ -75,8 +75,11 @@ char temp[word_len];
 struct link *ptr;
 
 FILE *f;
- 
-     f = fopen("cs.txt", "r");
+     if(argc != 2){ 
+       printf("Usage: %s <filename>\n", argv[0]);
+       exit(1);
+     }
+     f = fopen(argv[1], "r");
      i = 0;
      // assumes no word exceeds length of 1023
      while (fscanf(f, " %1023s", word[i]) == 1) {
@@ -87,8 +90,8 @@ FILE *f;
          }
      }
      n = i;
-//     for (i=0; i<n; i++) printf("%s ", word[i]);
-//     printf("\n\n");
+     for (i=0; i<n; i++) printf("%s ", word[i]);
+     printf("\n\n");
 
      word_curation(word, n);
 
@@ -96,6 +99,8 @@ FILE *f;
 
      printf("\n");
 */
+	for(i=0; i<10000; i++) hash_table[i] = NULL;
+
 	for(i=0; i<n; i++){
 	   h = hash_func(word[i]);
 	   if(hash_table[h] == NULL){
@@ -104,12 +109,20 @@ FILE *f;
 	     ptr->count = 1;
 	     ptr->next = NULL;
 	     hash_table[h] = ptr;
-	   } insert(hash_table[h], word[i]);
+	   } else insert(hash_table[h], word[i]);
 	}
+	
+	for(i=0; i<10000; i++){
+	   if(hash_table[i] == NULL) continue;
+	   ptr = hash_table[i];
+	   while (ptr != NULL) {
+	       printf("%s  %d\n", ptr->word, ptr->count);
+	       ptr = ptr->next;
+		}
+	}
+//	exit(0);
 
-	exit(0);
-
-//     bubble_sort_words(word, n);
+     bubble_sort_words(word, n);
 
 /*     for(i=0; i<n; i++) printf("%s ", word[i]);
            printf("\n\n");
@@ -133,7 +146,7 @@ FILE *f;
             wc[j].count ++;
         }
     }
-     for(i=0; i<j; i++) printf("%s   %d\n", wc[i].key, wc[i].count);
+     for(i=0; i<j+1; i++) printf("%s   %d\n", wc[i].key, wc[i].count);
 
      exit(0);
 

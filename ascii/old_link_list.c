@@ -22,7 +22,7 @@ void insert(struct link *head, char word[])
 	}
 	while (tail->next != NULL){
 		tail = tail->next;
-		if(strcmp(tail->word, word) == 0) {
+		if(strcmp(tail->word, word) == 0) { 
 		  tail->count ++;
 		  return;
 		}
@@ -31,7 +31,7 @@ void insert(struct link *head, char word[])
 	strcpy(ptr->word, word);
 	ptr->count = 1;
 	ptr->next = NULL;
-	
+
 	tail->next = ptr;
 	return;
 
