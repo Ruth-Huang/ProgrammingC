@@ -4,6 +4,8 @@
 #include <float.h>
 #include <tgmath.h>
 
+// useless stuff
+
 int main(int argc, char *argv[])
 {
 double x, y;
