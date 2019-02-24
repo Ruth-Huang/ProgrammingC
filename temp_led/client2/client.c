@@ -26,23 +26,31 @@ int main(int argc, char *argv[])
         printf("Invalid port number: %d\n", port_num);
         exit(1);
   }
-  setup_io();
-  setgpiofunc(8, 1);
 
   memset(buf, 0, 1000);
-
+  setup_io();
+  setgpiofunc(8, 1);
+  setgpiofunc(7, 0);
   sockfd = connect_server(argv[1], port_num);
-
-while(1){
+/*while(1){
   n = read(sockfd, buf, 999);
   if(n > 0) {
-	printf("%s\n", buf);
-        if(buf[0] ==  '1') write_to_gpio(0, 8);
-        else write_to_gpio(1, 8);
+     printf("%s\n", buf);
   }
-}
+}*/
+
+  while(1){
+  n = read(sockfd, buf, 999);
+  if(n > 0){
+      printf("%s\n", buf);
+      if(buf[0] == '0'){
+        write_to_gpio(0, 8);
+      }else {
+        write_to_gpio(1, 8);
+       }
+   }
+  }
   close(sockfd);
   return 0;
 }
-
 

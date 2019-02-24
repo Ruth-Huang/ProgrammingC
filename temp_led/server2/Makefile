@@ -11,8 +11,8 @@ TARGET = server
 
 all: $(TARGET)
 
-$(TARGET): server.o server_api.o i2c_api.o
-	$(CC) $(CFLAGS) -o $(TARGET) server.o server_api.o i2c_api.o
+$(TARGET): server.o server_api.o gpio.o i2c_api.o
+	$(CC) $(CFLAGS) -o $(TARGET) server.o server_api.o gpio.o i2c_api.o
 
 server.o: server.c server_api.h
 	$(CC) $(CFLAGS) -c server.c
@@ -20,8 +20,11 @@ server.o: server.c server_api.h
 server_api.o: server_api.c
 	$(CC) $(CFLAGS) -c server_api.c
 
+gpio.o: gpio.c gpio.h
+	$(CC) $(CFLAGS) -c gpio.c
+
 i2c_api.o: i2c_api.c i2c_api.h MPU9255.h
-	$(CC) $(CFLAGS) -c i2c_api.c -O2
+	$(CC) $(CFLAGS) -c i2c_api.c
 
 clean:
 	rm $(TARGET) *.o

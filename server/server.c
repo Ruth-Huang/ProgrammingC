@@ -36,7 +36,7 @@ int n;
 
 while(1){
   n = read_from_gpio(7);
-  
+
   if(n == 0) write(connfd, "0", 2);
   else write(connfd, "1", 2);
   usleep(100000);

@@ -22,5 +22,6 @@ client_api.o: client_api.c
 
 gpio.o: gpio.c gpio.h
 	$(CC) $(CFLAGS) -c gpio.c
+
 clean:
 	rm $(TARGET) *.o
